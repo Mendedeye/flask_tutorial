@@ -42,7 +42,11 @@ car_schema  = CarSchema()
 cars_schema = CarSchema(many=True)
 
 # Resources
-
+class CarListResources(Resource):
+    def get(self):
+        all_cars = Car.query.all()
+        return cars_schema.dump(all_cars)
 
 
 # Routes
+api.add_resource(CarListResources, '/api/cars')
